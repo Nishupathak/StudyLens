@@ -31,15 +31,17 @@ It was built with exam-prep students in mind, so quizzes and flashcards can be g
 
 | Ask with citations | Quiz |
 |---|---|
-| ![Ask](docs/screenshots/ask.png) | ![Quiz](docs/screenshots/quiz.png) |
-
+| ![Ask]<img width="1920" height="1080" alt="{EDDFA3D6-DA8C-4010-A9F8-DF9BC3D2EC8A}" src="https://github.com/user-attachments/assets/52977ce4-82cd-434e-a0d3-3514c48a8b71" />
+ | ![Quiz]<img width="1920" height="1080" alt="{674B20CD-31ED-48E3-83E5-354841D71EF0}" src="https://github.com/user-attachments/assets/8bd46970-2d4a-4e68-a7da-2be8e2ca0141" />
 | Flashcards and review | Library |
 |---|---|
-| ![Cards](docs/screenshots/cards.png) | ![Library](docs/screenshots/library.png) |
-
+| ![Cards]<img width="1920" height="1080" alt="{7C02EC66-C2D8-4726-8EE5-BCE17EF05E56}" src="https://github.com/user-attachments/assets/3baa7ced-86e3-4f38-bca6-8165df07eec0" />
+ | ![Library]<img width="1920" height="1080" alt="{87D5332E-3AF1-4842-9684-A6598954987E}" src="https://github.com/user-attachments/assets/b708e2b9-9c1b-43fa-92ff-d4175e592e1e" />
+ 
 | Fact-check | Light theme |
 |---|---|
-| ![Fact-check](docs/screenshots/fact-check.png) | ![Light theme](docs/screenshots/light-theme.png) |
+| ![Fact-check]<img width="1920" height="1080" alt="{45C34482-A196-433F-849A-65CF514FDC41}" src="https://github.com/user-attachments/assets/e65d0d50-677d-4b22-8b67-89ab24203eb9" />
+ | ![Light theme]<img width="1920" height="1080" alt="{60476FB8-AE7A-4143-95D1-F102680EADEF}" src="https://github.com/user-attachments/assets/ee29b83d-8796-4520-ab57-239b9eac298c" />
 
 ## Features
 
