@@ -301,4 +301,4 @@ Browser pages such as `chrome://` or `brave://` cannot be read by extensions.
 
 ## Author
 
-Built by **Jayesh**.
+Built by **Nishu**.
