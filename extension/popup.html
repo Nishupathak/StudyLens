@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0d11;
+      --surface: #12151b;
+      --surface2: #181c24;
+      --border: #232833;
+      --border2: #323948;
+      --text: #e5e8ee;
+      --muted: #8b94a5;
+      --accent: #3b82f6;
+      --accent-hover: #5a9bf8;
+      --accent-soft: rgba(59, 130, 246, 0.12);
+      --good: #4cc38a;
+      --good-bg: rgba(76, 195, 138, 0.12);
+      --bad: #f07178;
+      --bad-bg: rgba(240, 113, 120, 0.12);
+      --warn: #e5b567;
+      --warn-bg: rgba(229, 181, 103, 0.12);
+    }
+    :root[data-theme="light"] {
+      color-scheme: light;
+      --bg: #f6f7f9;
+      --surface: #ffffff;
+      --surface2: #f1f3f6;
+      --border: #e2e5eb;
+      --border2: #cdd2db;
+      --text: #12161d;
+      --muted: #667085;
+      --accent: #2563eb;
+      --accent-hover: #1d4fd0;
+      --accent-soft: rgba(37, 99, 235, 0.08);
+      --good: #1b8a57;
+      --good-bg: rgba(27, 138, 87, 0.1);
+      --bad: #c93c45;
+      --bad-bg: rgba(201, 60, 69, 0.08);
+      --warn: #9a6a14;
+      --warn-bg: rgba(154, 106, 20, 0.1);
+    }
+
+    * { box-sizing: border-box; }
+    body { width: 420px; margin: 0; padding: 16px; background: var(--bg); color: var(--text);
+           font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+           font-size: 13.5px; line-height: 1.5; }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 8px; }
+
+    /* Header */
+    .header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .logo { width: 24px; height: 24px; border-radius: 6px; }
+    h1 { font-size: 15px; margin: 0; font-weight: 600; letter-spacing: 0.2px; flex: 1; }
+    .streak { font-size: 11.5px; color: var(--muted); border: 1px solid var(--border);
+              padding: 3px 9px; border-radius: 6px; }
+    .icon-btn { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
+                border-radius: 6px; border: 1px solid var(--border); background: transparent;
+                color: var(--muted); cursor: pointer; transition: all 0.15s; }
+    .icon-btn:hover { color: var(--text); border-color: var(--border2); background: var(--surface); }
+
+    /* Tabs */
+    .tabs { display: flex; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+    .tab { flex: 1; padding: 9px 0; background: transparent; color: var(--muted); border: 0;
+           border-bottom: 2px solid transparent; margin-bottom: -1px; cursor: pointer;
+           font-family: inherit; font-size: 13px; font-weight: 500; transition: color 0.15s; }
+    .tab:hover { color: var(--text); }
+    .tab.active { color: var(--text); border-bottom-color: var(--accent); }
+
+    .hidden { display: none !important; }
+    .view { animation: fade 0.15s ease; }
+    @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+
+    /* Inputs */
+    textarea, input[type=text], select {
+      background: var(--surface); color: var(--text); border: 1px solid var(--border);
+      border-radius: 6px; font-family: inherit; font-size: 13.5px; transition: border-color 0.15s; }
+    textarea:focus, input[type=text]:focus, select:focus { outline: none; border-color: var(--accent); }
+    textarea::placeholder, input::placeholder { color: var(--muted); }
+    textarea { width: 100%; height: 78px; padding: 10px; resize: none; }
+    input[type=text] { width: 100%; padding: 10px; margin-top: 10px; }
+    select { padding: 8px 9px; font-size: 13px; }
+    .row { display: flex; gap: 8px; margin-bottom: 4px; }
+    .row select { flex: 1; }
+
+    /* Buttons */
+    .primary { width: 100%; margin-top: 10px; padding: 10px; color: #fff; background: var(--accent);
+               border: 1px solid transparent; border-radius: 6px; font-family: inherit;
+               font-weight: 600; font-size: 13px; cursor: pointer; transition: background 0.15s; }
+    .primary:hover:not(:disabled) { background: var(--accent-hover); }
+    .primary:disabled { opacity: 0.55; cursor: wait; }
+    .secondary { width: 100%; margin-top: 8px; padding: 9px; background: transparent; color: var(--text);
+                 border: 1px solid var(--border2); border-radius: 6px; font-family: inherit;
+                 font-weight: 500; font-size: 13px; cursor: pointer; transition: all 0.15s; }
+    .secondary:hover { background: var(--surface); border-color: var(--accent); }
+    .secondary.good { color: var(--good); border-color: var(--good); background: var(--good-bg); }
+    .secondary.again { color: var(--bad); border-color: var(--bad); background: var(--bad-bg); }
+    .btnrow { display: flex; gap: 8px; }
+
+    /* Result boxes */
+    #answer, #quizBox, #cardsBox, #libAnswer {
+      margin-top: 12px; padding: 12px; background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; white-space: pre-wrap; max-height: 340px; overflow-y: auto; }
+    #answer:empty, #quizBox:empty, #cardsBox:empty, #libAnswer:empty { display: none; }
+    .error { color: var(--bad); }
+    .progress { font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+    .quotes-title, .lib-title { margin-top: 18px; font-size: 11px; font-weight: 600; color: var(--muted);
+                                 text-transform: uppercase; letter-spacing: 0.07em; }
+
+    /* Sources and quotes */
+    .quote, .src { display: block; width: 100%; text-align: left; margin-top: 6px; padding: 9px 10px;
+                   background: var(--surface); color: var(--text); border: 1px solid var(--border);
+                   border-left: 2px solid var(--accent); border-radius: 6px; font-family: inherit;
+                   font-size: 12.5px; line-height: 1.45; cursor: pointer; transition: background 0.15s; }
+    .quote:hover, .src:hover { background: var(--surface2); }
+    .src small { display: block; color: var(--muted); margin-top: 3px; font-size: 11.5px; }
+    .tag { display: inline-block; font-size: 10px; font-weight: 700; text-transform: uppercase;
+           letter-spacing: 0.06em; padding: 1px 6px; border-radius: 4px; margin-right: 6px; }
+    .tag-supports { color: var(--good); background: var(--good-bg); }
+    .tag-disputes { color: var(--bad); background: var(--bad-bg); }
+    .tag-neutral { color: var(--muted); background: var(--surface2); }
+
+    /* Quiz */
+    .qtext { font-weight: 600; margin-bottom: 10px; }
+    .opt { display: block; width: 100%; text-align: left; margin-top: 6px; padding: 9px 10px;
+           background: var(--surface2); color: var(--text); border: 1px solid var(--border);
+           border-radius: 6px; font-family: inherit; font-size: 13px; cursor: pointer; transition: all 0.15s; }
+    .opt:hover:not(:disabled) { border-color: var(--accent); }
+    .opt.correct { background: var(--good-bg); border-color: var(--good); color: var(--good); }
+    .opt.wrong { background: var(--bad-bg); border-color: var(--bad); color: var(--bad); }
+    .explain { margin-top: 10px; font-size: 12.5px; color: var(--muted); }
+    .score { font-size: 17px; font-weight: 600; text-align: center; padding: 12px 0; }
+
+    /* Flashcards */
+    .card-preview { padding: 10px; margin-top: 6px; background: var(--surface2); border-radius: 6px;
+                    border-left: 2px solid var(--accent); font-size: 13px; }
+    .card-preview b { display: block; margin-bottom: 3px; font-weight: 600; }
+    .flipcard { padding: 18px; background: var(--surface2); border: 1px solid var(--border);
+                border-radius: 8px; text-align: center; font-size: 15px; min-height: 70px; }
+    .flipback { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border);
+                color: var(--accent); font-size: 14px; }
+
+    /* Library */
+    #libList { max-height: 170px; overflow-y: auto; }
+    .lib-item { display: flex; align-items: center; gap: 8px; margin-top: 6px; padding: 9px 10px;
+                background: var(--surface); border: 1px solid var(--border); border-radius: 6px; font-size: 12.5px; }
+    .lib-item a { flex: 1; color: var(--text); text-decoration: none; overflow: hidden; cursor: pointer; }
+    .lib-item small { display: block; color: var(--muted); margin-top: 1px; }
+    .del { background: none; border: 0; color: var(--muted); cursor: pointer; font-family: inherit; font-size: 12px; }
+    .del:hover { color: var(--bad); }
+
+    /* Fact-check */
+    #checkResult { margin-top: 14px; }
+    #checkResult:empty { display: none; }
+    .verdict { display: inline-block; padding: 3px 10px; border-radius: 4px; font-weight: 700;
+               font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.06em; }
+    .v-supported { background: var(--good-bg); color: var(--good); }
+    .v-disputed { background: var(--bad-bg); color: var(--bad); }
+    .v-mixed { background: var(--warn-bg); color: var(--warn); }
+    .v-unclear { background: var(--surface2); color: var(--muted); }
+    .summary { margin-top: 10px; line-height: 1.55; }
+    .note { margin-top: 14px; font-size: 11.5px; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <img class="logo" src="icons/icon48.png" alt="" />
+    <h1>StudyLens</h1>
+    <div class="streak" id="streak"></div>
+    <button class="icon-btn" id="themeBtn" title="Switch theme"></button>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" id="tabAsk">Ask</button>
+    <button class="tab" id="tabQuiz">Quiz</button>
+    <button class="tab" id="tabCards">Cards</button>
+    <button class="tab" id="tabLib">Library</button>
+    <button class="tab" id="tabCheck">Check</button>
+  </div>
+
+  <div id="askView" class="view">
+    <textarea id="question" placeholder="Ask anything about this page, e.g. Summarize this page"></textarea>
+    <button class="primary" id="askBtn">Ask</button>
+    <div id="answer"></div>
+    <div id="sources"></div>
+  </div>
+
+  <div id="quizView" class="view hidden">
+    <div class="row">
+      <select id="quizCount">
+        <option value="3">3 questions</option>
+        <option value="5" selected>5 questions</option>
+        <option value="10">10 questions</option>
+      </select>
+      <select id="quizLang">
+        <option value="English">English</option>
+        <option value="Hindi">Hindi</option>
+        <option value="Hinglish">Hinglish</option>
+      </select>
+    </div>
+    <button class="primary" id="quizBtn">Generate quiz</button>
+    <div id="quizBox"></div>
+  </div>
+
+  <div id="cardsView" class="view hidden">
+    <div class="row">
+      <select id="cardsCount">
+        <option value="5">5 cards</option>
+        <option value="8" selected>8 cards</option>
+        <option value="12">12 cards</option>
+      </select>
+      <select id="cardsLang">
+        <option value="English">English</option>
+        <option value="Hindi">Hindi</option>
+        <option value="Hinglish">Hinglish</option>
+      </select>
+    </div>
+    <button class="primary" id="cardsBtn">Make flashcards from this page</button>
+    <button class="secondary" id="reviewBtn">Review deck</button>
+    <div id="cardsBox"></div>
+  </div>
+
+  <div id="libView" class="view hidden">
+    <button class="primary" id="saveBtn" style="margin-top: 0">Save this page to library</button>
+    <div id="saveMsg" class="progress" style="margin-top: 8px"></div>
+
+    <input type="text" id="libQuestion" placeholder="Ask your library, e.g. what did I read about DRDO?" />
+    <div class="row" style="margin-top: 8px">
+      <select id="libRange">
+        <option value="0">All time</option>
+        <option value="7">Last 7 days</option>
+        <option value="30">Last 30 days</option>
+      </select>
+    </div>
+    <button class="primary" id="libAskBtn">Search my library</button>
+    <div id="libAnswer"></div>
+    <div id="libSources"></div>
+
+    <div class="lib-title">Quiz from saved pages (uses the time range above)</div>
+    <div class="row" style="margin-top: 6px">
+      <select id="libQuizCount">
+        <option value="3">3 questions</option>
+        <option value="5" selected>5 questions</option>
+        <option value="10">10 questions</option>
+      </select>
+      <select id="libQuizLang">
+        <option value="English">English</option>
+        <option value="Hindi">Hindi</option>
+        <option value="Hinglish">Hinglish</option>
+      </select>
+    </div>
+    <input type="text" id="libTopic" placeholder="Topic (optional), e.g. DRDO" />
+    <button class="secondary" id="libQuizBtn">Quiz me from my library</button>
+    <div id="libQuizMsg" class="progress" style="margin-top: 8px"></div>
+
+    <div class="lib-title" id="libTitle"></div>
+    <div id="libList"></div>
+  </div>
+
+  <div id="checkView" class="view hidden">
+    <textarea id="claimBox" placeholder="Select a sentence on the page, then open this tab. Or type a claim here."></textarea>
+    <button class="primary" id="checkBtn">Check claim</button>
+    <div id="checkResult"></div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
