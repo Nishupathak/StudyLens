@@ -25,7 +25,7 @@ Open any article, ask questions about it, get answers backed by the exact senten
 
 It was built with exam-prep students in mind, so quizzes and flashcards can be generated in **English, Hindi, or Hinglish**.
 
-## Screenshots
+## Screenshots of work
 
 <!-- Add your screenshots to docs/screenshots/ using these file names. -->
 
