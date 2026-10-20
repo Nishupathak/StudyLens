@@ -2,7 +2,7 @@
 
 <img src="extension/icons/icon128.png" alt="StudyLens logo" width="84" />
 
-# StudyLens
+# StudyLens - Smarter Extension
 
 **A browser extension that helps you read smarter, verify claims, and actually remember what you learn.**
 
