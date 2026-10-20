@@ -4,7 +4,7 @@
 
 # StudyLens - Smarter Extension
 
-**A browser extension that helps you read smarter, verify claims, and actually remember what you learn.**
+**A browser extension that helps you read and learn smarter, verify claims, and actually remember what you learn.**
 
 ![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-backend-009688?logo=fastapi&logoColor=white)
